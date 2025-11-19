@@ -1,177 +1,117 @@
 <!DOCTYPE html>
-<html lang="es">
+<html>
 <head>
 <meta charset="UTF-8">
 <title>Control Avances del Sistema</title>
 
 <style>
-  body {
-    font-family: Arial, sans-serif;
-    text-align: center;
+  body, html {
     margin: 0;
     padding: 0;
+    width: 100%;
+    height: 100%;
+    font-family: Arial, sans-serif;
   }
 
-  /* ---------------- LOGIN ---------------- */
-  #login {
-    margin-top: 100px;
+  /* Pantalla de login */
+  #login-screen {
+    width: 100%;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
   }
 
-  #login input {
-    padding: 12px;
-    font-size: 20px;
-    width: 250px;
-    border-radius: 6px;
-    border: 1px solid #003366;
-    margin-bottom: 20px;
-  }
-
-  #login button {
-    background-color: #003366;
-    color: white;
-    padding: 12px 40px;
-    font-size: 20px;
-    border: none;
-    border-radius: 6px;
-    cursor: pointer;
-  }
-
-  #login button:hover {
-    background-color: #002244;
-  }
-
-  /* ---------------- ESTILOS DEL SISTEMA ---------------- */
-  h1 {
-    font-size: 48px;
-    color: #003366;
-    margin-top: 50px;
-  }
-
-  h2 {
-    font-size: 34px;
-    color: #003366;
-  }
-
+  /* Botones */
   .button {
-    background-color: #003366;
+    background-color: #00224D; /* Azul oscuro */
     border: none;
     color: white;
-    padding: 20px 50px;
-    font-size: 22px;
+    padding: 20px 40px;
+    font-size: 20px;
+    margin: 10px;
+    cursor: pointer;
     border-radius: 8px;
-    cursor: pointer;
-    margin: 15px;
   }
 
-  .button:hover {
-    background-color: #002244;
-  }
-
-  .seccion {
+  /* Ocultar secciones hasta que se activen */
+  .section {
     display: none;
-    margin-top: 40px;
+    width: 100%;
+    height: 100vh;
   }
 
-  .regresar {
-    background-color: #003366;
-    border: none;
-    color: white;
-    padding: 15px 40px;
-    font-size: 18px;
-    border-radius: 6px;
-    cursor: pointer;
-    margin-top: 40px;
+  /* Imagen en pantalla completa */
+  .full-img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover; /* hace que ocupe toda la pantalla */
   }
 
-  .regresar:hover {
-    background-color: #002244;
-  }
-
-  img {
-    max-width: 95%;
-    height: auto;
-    margin-top: 30px;
-    border: 2px solid #003366;
-    border-radius: 10px;
+  /* Título principal */
+  h1 {
+    text-align: center;
+    font-size: 40px;
+    margin-top: 20px;
+    color: #00224D;
   }
 </style>
 
 <script>
-  // -------- LOGIN --------
-  function acceder() {
-    let passwordIngresada = document.getElementById("pass").value;
-    let passwordCorrecta = "1234";  // <-- CAMBIA AQUÍ TU CONTRASEÑA
+  const PASSWORD = "admin123"; // ← Aquí cambias la contraseña
 
-    if (passwordIngresada === passwordCorrecta) {
-      document.getElementById("login").style.display = "none";
-      document.getElementById("contenido").style.display = "block";
+  function login() {
+    let pass = document.getElementById("pass").value;
+    if (pass === PASSWORD) {
+      document.getElementById("login-screen").style.display = "none";
+      document.getElementById("menu").style.display = "block";
     } else {
-      alert("Contraseña incorrecta.");
+      alert("Contraseña incorrecta");
     }
   }
 
-  // -------- CAMBIO DE SECCIONES --------
-  function mostrarSeccion(id) {
-    document.getElementById("inicio").style.display = "none";
-    document.getElementById("estructura").style.display = "none";
-    document.getElementById("agente").style.display = "none";
-    document.getElementById("requerimientos").style.display = "none";
-    document.getElementById(id).style.display = "block";
-  }
-
-  function regresar() {
-    document.getElementById("inicio").style.display = "block";
-    document.getElementById("estructura").style.display = "none";
-    document.getElementById("agente").style.display = "none";
-    document.getElementById("requerimientos").style.display = "none";
+  function showSection(sectionId) {
+    document.querySelectorAll(".section").forEach(s => s.style.display = "none");
+    document.getElementById(sectionId).style.display = "block";
   }
 </script>
 
 </head>
 <body>
 
-<!-- ---------------- LOGIN ---------------- -->
-<div id="login">
-  <h2>Ingrese la contraseña para continuar</h2>
-  <input type="password" id="pass" placeholder="Contraseña"><br>
-  <button onclick="acceder()">Ingresar</button>
+<h1>CONTROL AVANCES DEL SISTEMA</h1>
+
+<!-- Pantalla de Login -->
+<div id="login-screen">
+  <input id="pass" type="password" placeholder="Ingrese contraseña" style="padding: 10px; font-size: 18px;">
+  <button class="button" onclick="login()">Ingresar</button>
 </div>
 
-<!-- ---------------- CONTENIDO ---------------- -->
-<div id="contenido" style="display:none;">
+<!-- MENÚ PRINCIPAL -->
+<div id="menu" style="display:none; text-align:center; margin-top:40px;">
+  <button class="button" onclick="showSection('estructura')">Estructura</button>
+  <button class="button" onclick="showSection('efectividad')">% Efectividad</button>
+  <button class="button" onclick="showSection('requerimientos')">Requerimientos</button>
+</div>
 
-  <!-- INICIO -->
-  <div id="inicio">
-    <h1>CONTROL AVANCES DEL SISTEMA</h1>
+<!-- SECCIÓN 1 -->
+<div id="estructura" class="section">
+  <button class="button" onclick="showSection('menu')">Regresar</button>
+  <img src="imagen01.png" class="full-img">
+</div>
 
-    <button class="button" onclick="mostrarSeccion('estructura')">Estructura</button>
-    <button class="button" onclick="mostrarSeccion('agente')">% de Efectividad</button>
-    <button class="button" onclick="mostrarSeccion('requerimientos')">Requerimientos</button>
-  </div>
+<!-- SECCIÓN 2 -->
+<div id="efectividad" class="section">
+  <button class="button" onclick="showSection('menu')">Regresar</button>
+  <img src="imagen02.png" class="full-img">
+</div>
 
-  <!-- ESTRUCTURA -->
-  <div id="estructura" class="seccion">
-    <h2>Estructura del Sistema</h2>
-    <img src="imagen01.png">
-    <button class="regresar" onclick="regresar()">Regresar</button>
-  </div>
-
-  <!-- EFECTIVIDAD -->
-  <div id="agente" class="seccion">
-    <h2>% de Efectividad</h2>
-    <img src="imagen02.png">
-    <button class="regresar" onclick="regresar()">Regresar</button>
-  </div>
-
-  <!-- REQUERIMIENTOS -->
-  <div id="requerimientos" class="seccion">
-    <h2>Requerimientos</h2>
-    <img src="imagen03.png">
-    <button class="regresar" onclick="regresar()">Regresar</button>
-  </div>
-
+<!-- SECCIÓN 3 -->
+<div id="requerimientos" class="section">
+  <button class="button" onclick="showSection('menu')">Regresar</button>
+  <img src="imagen03.png" class="full-img">
 </div>
 
 </body>
 </html>
-
