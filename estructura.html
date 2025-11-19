@@ -1,11 +1,132 @@
 <!DOCTYPE html>
-<html>
+<html lang="es">
 <head>
-  <meta charset="UTF-8">
-  <title>CONTROL SISTEMA</title>
+<meta charset="UTF-8">
+<title>Control Avances del Sistema</title>
+
+<style>
+  body, html {
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    height: 100%;
+    font-family: Arial, sans-serif;
+    overflow: hidden; /* opcional: quita barra de scroll */
+  }
+
+  #login-screen {
+    width: 100%;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .button {
+    background-color: #00224D; 
+    border: none;
+    color: white;
+    padding: 20px 40px;
+    font-size: 20px;
+    margin: 10px;
+    cursor: pointer;
+    border-radius: 8px;
+    z-index: 10;
+  }
+
+  .section {
+    display: none;
+    position: relative;
+    width: 100%;
+    height: 100vh;
+  }
+
+  .section img {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  .regresar {
+    position: absolute;
+    top: 20px;
+    left: 20px;
+    background-color: #00224D;
+    border: none;
+    color: white;
+    padding: 15px 40px;
+    font-size: 18px;
+    border-radius: 6px;
+    cursor: pointer;
+    z-index: 20;
+  }
+
+  h1 {
+    text-align: center;
+    font-size: 40px;
+    margin-top: 20px;
+    color: #00224D;
+  }
+</style>
+
+<script>
+  const PASSWORD = "admin123";
+
+  function login() {
+    let pass = document.getElementById("pass").value;
+    if (pass === PASSWORD) {
+      document.getElementById("login-screen").style.display = "none";
+      document.getElementById("menu").style.display = "block";
+    } else {
+      alert("Contraseña incorrecta");
+    }
+  }
+
+  function showSection(sectionId) {
+    document.querySelectorAll(".section").forEach(s => s.style.display = "none");
+    document.getElementById(sectionId).style.display = "block";
+    document.getElementById("menu").style.display = "none";
+  }
+
+  function regresarMenu() {
+    document.querySelectorAll(".section").forEach(s => s.style.display = "none");
+    document.getElementById("menu").style.display = "block";
+  }
+</script>
+
 </head>
 <body>
-  <img src="img/imagen01.png">
-</body>
 
+<h1>CONTROL AVANCES DEL SISTEMA</h1>
+
+<div id="login-screen">
+  <input id="pass" type="password" placeholder="Ingrese contraseña" style="padding: 10px; font-size: 18px;">
+  <button class="button" onclick="login()">Ingresar</button>
+</div>
+
+<div id="menu" style="display:none; text-align:center; margin-top:40px;">
+  <button class="button" onclick="showSection('estructura')">Estructura</button>
+  <button class="button" onclick="showSection('efectividad')">% Efectividad</button>
+  <button class="button" onclick="showSection('requerimientos')">Requerimientos</button>
+</div>
+
+<div id="estructura" class="section">
+  <button class="regresar" onclick="regresarMenu()">Regresar</button>
+  <img src="img/imagen01.png" alt="Estructura">
+</div>
+
+<div id="efectividad" class="section">
+  <button class="regresar" onclick="regresarMenu()">Regresar</button>
+  <img src="img/imagen02.png" alt="Efectividad">
+</div>
+
+<div id="requerimientos" class="section">
+  <button class="regresar" onclick="regresarMenu()">Regresar</button>
+  <img src="img/imagen03.png" alt="Requerimientos">
+</div>
+
+</body>
 </html>
