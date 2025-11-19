@@ -8,13 +8,14 @@
   body {
     font-family: Arial, sans-serif;
     text-align: center;
-    margin-top: 80px;
+    margin: 0;
+    padding: 0;
   }
 
   h1 {
     font-size: 48px;
     color: #003366;
-    margin-bottom: 60px;
+    margin-top: 50px;
   }
 
   .button {
@@ -31,13 +32,80 @@
   .button:hover {
     background-color: #002244;
   }
+
+  .seccion {
+    display: none;
+    margin-top: 40px;
+  }
+
+  .regresar {
+    background-color: #003366;
+    border: none;
+    color: white;
+    padding: 15px 40px;
+    font-size: 18px;
+    border-radius: 6px;
+    cursor: pointer;
+    margin-top: 40px;
+  }
+
+  .regresar:hover {
+    background-color: #002244;
+  }
 </style>
+
+<script>
+  function mostrarSeccion(id) {
+    document.getElementById("inicio").style.display = "none";
+    document.getElementById("estructura").style.display = "none";
+    document.getElementById("agente").style.display = "none";
+    document.getElementById("requerimientos").style.display = "none";
+    document.getElementById(id).style.display = "block";
+  }
+
+  function regresar() {
+    document.getElementById("inicio").style.display = "block";
+    document.getElementById("estructura").style.display = "none";
+    document.getElementById("agente").style.display = "none";
+    document.getElementById("requerimientos").style.display = "none";
+  }
+</script>
 
 </head>
 <body>
 
+<!-- ------------------ INICIO ------------------ -->
+<div id="inicio">
   <h1>CONTROL AVANCES DEL SISTEMA</h1>
 
-  <button class="button" onclick="document.location='estructura.html'">Estructura</button>
-  <button class="button" onclick="document.location='agente.html'">% de Efectividad</button>
-  <button class="button" onclick="document.
+  <button class="button" onclick="mostrarSeccion('estructura')">Estructura</button>
+  <button class="button" onclick="mostrarSeccion('agente')">% de Efectividad</button>
+  <button class="button" onclick="mostrarSeccion('requerimientos')">Requerimientos</button>
+</div>
+
+<!-- ------------------ SECCIÓN ESTRUCTURA ------------------ -->
+<div id="estructura" class="seccion">
+  <h2>Estructura del Sistema</h2>
+  <p>Aquí va el contenido de la estructura...</p>
+
+  <button class="regresar" onclick="regresar()">Regresar</button>
+</div>
+
+<!-- ------------------ SECCIÓN AGENTE ------------------ -->
+<div id="agente" class="seccion">
+  <h2>% de Efectividad</h2>
+  <p>Aquí va el contenido del reporte de efectividad...</p>
+
+  <button class="regresar" onclick="regresar()">Regresar</button>
+</div>
+
+<!-- ------------------ SECCIÓN REQUERIMIENTOS ------------------ -->
+<div id="requerimientos" class="seccion">
+  <h2>Requerimientos</h2>
+  <p>Aquí van los requerimientos del sistema...</p>
+
+  <button class="regresar" onclick="regresar()">Regresar</button>
+</div>
+
+</body>
+</html>
