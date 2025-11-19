@@ -12,6 +12,35 @@
     padding: 0;
   }
 
+  /* ---------------- LOGIN ---------------- */
+  #login {
+    margin-top: 100px;
+  }
+
+  #login input {
+    padding: 12px;
+    font-size: 20px;
+    width: 250px;
+    border-radius: 6px;
+    border: 1px solid #003366;
+    margin-bottom: 20px;
+  }
+
+  #login button {
+    background-color: #003366;
+    color: white;
+    padding: 12px 40px;
+    font-size: 20px;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+  }
+
+  #login button:hover {
+    background-color: #002244;
+  }
+
+  /* ---------------- ESTILOS DEL SISTEMA ---------------- */
   h1 {
     font-size: 48px;
     color: #003366;
@@ -24,7 +53,7 @@
   }
 
   .button {
-    background-color: #003366; /* Azul oscuro */
+    background-color: #003366;
     border: none;
     color: white;
     padding: 20px 50px;
@@ -68,6 +97,20 @@
 </style>
 
 <script>
+  // -------- LOGIN --------
+  function acceder() {
+    let passwordIngresada = document.getElementById("pass").value;
+    let passwordCorrecta = "1234";  // <-- CAMBIA AQUÍ TU CONTRASEÑA
+
+    if (passwordIngresada === passwordCorrecta) {
+      document.getElementById("login").style.display = "none";
+      document.getElementById("contenido").style.display = "block";
+    } else {
+      alert("Contraseña incorrecta.");
+    }
+  }
+
+  // -------- CAMBIO DE SECCIONES --------
   function mostrarSeccion(id) {
     document.getElementById("inicio").style.display = "none";
     document.getElementById("estructura").style.display = "none";
@@ -87,40 +130,46 @@
 </head>
 <body>
 
-<!-- ------------------ INICIO ------------------ -->
-<div id="inicio">
-  <h1>CONTROL AVANCES DEL SISTEMA</h1>
-
-  <button class="button" onclick="mostrarSeccion('estructura')">Estructura</button>
-  <button class="button" onclick="mostrarSeccion('agente')">% de Efectividad</button>
-  <button class="button" onclick="mostrarSeccion('requerimientos')">Requerimientos</button>
+<!-- ---------------- LOGIN ---------------- -->
+<div id="login">
+  <h2>Ingrese la contraseña para continuar</h2>
+  <input type="password" id="pass" placeholder="Contraseña"><br>
+  <button onclick="acceder()">Ingresar</button>
 </div>
 
-<!-- ------------------ SECCIÓN ESTRUCTURA ------------------ -->
-<div id="estructura" class="seccion">
-  <h2>Estructura del Sistema</h2>
+<!-- ---------------- CONTENIDO ---------------- -->
+<div id="contenido" style="display:none;">
 
- <img src="img/imagen01.png" alt="Estructura del Sistema">
+  <!-- INICIO -->
+  <div id="inicio">
+    <h1>CONTROL AVANCES DEL SISTEMA</h1>
 
-  <button class="regresar" onclick="regresar()">Regresar</button>
-</div>
+    <button class="button" onclick="mostrarSeccion('estructura')">Estructura</button>
+    <button class="button" onclick="mostrarSeccion('agente')">% de Efectividad</button>
+    <button class="button" onclick="mostrarSeccion('requerimientos')">Requerimientos</button>
+  </div>
 
-<!-- ------------------ SECCIÓN EFECTIVIDAD ------------------ -->
-<div id="agente" class="seccion">
-  <h2>% de Efectividad</h2>
+  <!-- ESTRUCTURA -->
+  <div id="estructura" class="seccion">
+    <h2>Estructura del Sistema</h2>
+    <img src="imagen01.png">
+    <button class="regresar" onclick="regresar()">Regresar</button>
+  </div>
 
-  <img src="img/imagen01.png" alt="Efectividad del Sistema">
+  <!-- EFECTIVIDAD -->
+  <div id="agente" class="seccion">
+    <h2>% de Efectividad</h2>
+    <img src="imagen02.png">
+    <button class="regresar" onclick="regresar()">Regresar</button>
+  </div>
 
-  <button class="regresar" onclick="regresar()">Regresar</button>
-</div>
+  <!-- REQUERIMIENTOS -->
+  <div id="requerimientos" class="seccion">
+    <h2>Requerimientos</h2>
+    <img src="imagen03.png">
+    <button class="regresar" onclick="regresar()">Regresar</button>
+  </div>
 
-<!-- ------------------ SECCIÓN REQUERIMIENTOS ------------------ -->
-<div id="requerimientos" class="seccion">
-  <h2>Requerimientos</h2>
-
-   <img src="img/imagen03.png" alt="Efectividad del Sistema">
-
-  <button class="regresar" onclick="regresar()">Regresar</button>
 </div>
 
 </body>
